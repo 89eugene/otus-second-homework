@@ -1,0 +1,26 @@
+# Default values for first-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+namespace: second-homework
+
+replicaCount: 2
+
+image:
+  repository: eugene89/secondapp
+
+ingress:
+  hostname: arch.homework
+
+service:
+  type: NodePort
+  port: 8000
+
+externalPostgresql:
+  postgresqlUserName: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  postgresqlHost: "postgres"
+  postgresqlPort: "5432"
+
+postgres:
+  image: postgres:11

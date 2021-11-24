@@ -1,1 +1,1 @@
-# otus-second-homework
+# otus

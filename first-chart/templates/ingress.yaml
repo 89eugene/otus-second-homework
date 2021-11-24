@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "first-chart.fullname" . }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/rewrite-target: /health
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+      - path: /health
+        pathType: Exact
+        backend:
+          service:
+            name: {{ include "first-chart.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
+      - path: /user
+        pathType: Exact
+        backend:
+          service:
+            name: {{ include "first-chart.fullname" . }}
+            port:
+              number: {{ .Values.service.port }}
